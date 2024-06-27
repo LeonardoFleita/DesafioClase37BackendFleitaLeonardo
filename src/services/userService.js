@@ -19,14 +19,9 @@ class UserService {
     }
   };
 
-  setPremiumUser = async (userId) => {
+  updateUser = async (user) => {
     try {
-      if (userId === ":uId") {
-        throw new Error("invalid parameters");
-      }
-      const user = await this.getUserById(userId);
-      let premium = user.premium;
-      await this.manager.setPremiumUser(userId, !premium);
+      await this.manager.updateUser(user);
     } catch (err) {
       throw Error(err.message);
     }

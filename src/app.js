@@ -8,6 +8,7 @@ const CartManager = require(`${__dirname}/dao/dbManagers/cartManager`);
 const viewsRouter = require(`${__dirname}/routes/viewsRouter`);
 const sessionRouter = require(`${__dirname}/routes/sessionRouter`);
 const usersRouter = require(`${__dirname}/routes/usersRouter`);
+const emailRouter = require(`${__dirname}/routes/emailRouter`);
 const UserManager = require(`${__dirname}/dao/dbManagers/userManager`);
 const ProductManager = require(`${__dirname}/dao/dbManagers/productManager`);
 const passport = require("passport");
@@ -41,6 +42,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/email", emailRouter);
 
 app.use(`/`, viewsRouter);
 

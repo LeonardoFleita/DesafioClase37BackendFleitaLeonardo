@@ -2,10 +2,10 @@ const { Router } = require("express");
 const {
   isNotLoggedIn,
   isLoggedIn,
-  isAdmin,
   productPermission,
 } = require("../middlewares/auth.middleware");
 const { generateProduct } = require("../mocks/generateProducts");
+const jwt = require("jsonwebtoken");
 
 const router = Router();
 
@@ -144,6 +144,30 @@ router.get("/register", isNotLoggedIn, (req, res) => {
     title: "Registro",
     css: ["styles.css"],
     endPoint: "Registro",
+    login: false,
+  });
+});
+
+//Retorna la vista que permite enviar email para restaurar la contraseña
+
+router.get("/forgotPassword", isNotLoggedIn, (req, res) => {
+  res.render("forgotPassword", {
+    title: "Envío de email",
+    css: ["styles.css"],
+    endPoint: "Envío de email",
+    login: false,
+  });
+});
+
+//Retorna la vista que permite restaurar la contraseña
+
+router.get("/restorePassword/:token", isNotLoggedIn, (req, res) => {
+  const { token } = req.params;
+  res.render("restorePassword", {
+    title: "Restaurar contraseña",
+    css: ["styles.css"],
+    token: token,
+    endPoint: "Restaurar contraseña",
     login: false,
   });
 });

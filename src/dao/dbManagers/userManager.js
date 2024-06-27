@@ -50,7 +50,7 @@ class UserManager {
   getUserByEmail = async (email) => {
     try {
       const user = await UserModel.findOne({ email });
-      return user;
+      return user.toObject();
     } catch (err) {
       throw Error(err.message);
     }
@@ -58,9 +58,9 @@ class UserManager {
 
   //Actualiza un usuario
 
-  setPremiumUser = async (userId, premium) => {
+  updateUser = async (user) => {
     try {
-      await UserModel.updateOne({ _id: userId }, { $set: { premium } });
+      await UserModel.updateOne({ _id: user._id }, { $set: { ...user } });
     } catch (err) {
       throw Error(err.message);
     }
