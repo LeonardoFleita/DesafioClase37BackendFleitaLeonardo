@@ -61,7 +61,7 @@ class UserController {
         throw new Error("not found");
       }
       const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
-        expiresIn: "1m",
+        expiresIn: "1h",
       });
 
       const restoreLink = `http://localhost:8080/restorePassword/${token}`;
