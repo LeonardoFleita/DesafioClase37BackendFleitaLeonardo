@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { UserController } = require("../controllers/userController");
 const { UserService } = require("../services/userService");
-const { isUser } = require("../middlewares/auth.middleware");
+const { isUser, isLoggedIn } = require("../middlewares/auth.middleware");
 
 const router = Router();
 
@@ -13,11 +13,12 @@ const withController = (callback) => {
   };
 };
 
-// router.post(
-//   "/premium/:uId",
-//   isUser,
-//   withController((controller, req, res) => controller.getSessionUser(req, res))
-// );
+router.post(
+  "/premium/:uId",
+  isLoggedIn,
+  isUser,
+  withController((controller, req, res) => controller.setPremiumUser(req, res))
+);
 
 //Crear un nuevo usuario
 

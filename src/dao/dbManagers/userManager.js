@@ -58,9 +58,9 @@ class UserManager {
 
   //Actualiza un usuario
 
-  updateUser = async (user) => {
+  setPremiumUser = async (userId, premium) => {
     try {
-      await UserModel.updateOne({ _id: user.id }, { $set: user });
+      await UserModel.updateOne({ _id: userId }, { $set: { premium } });
     } catch (err) {
       throw Error(err.message);
     }

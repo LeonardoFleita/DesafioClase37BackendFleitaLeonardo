@@ -36,13 +36,17 @@ class UserController {
     }
   };
 
-  // setPremiumUser = async (req, res) => {
-  //   try {
-  //     const userId = req.params.uId;
-  //     const sessionUser = req.session.user;
-
-  //   } catch (err) {}
-  // };
+  setPremiumUser = async (req, res) => {
+    try {
+      const userId = req.params.uId;
+      await this.service.setPremiumUser(userId);
+      let updatedUser = await this.service.getUserById(userId);
+      updatedUser = new CurrentUserDto(updatedUser);
+      res.status(200).json({ updatedUser });
+    } catch (err) {
+      res.status(403).json({ error: err.message });
+    }
+  };
 }
 
 module.exports = { UserController };
