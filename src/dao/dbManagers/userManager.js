@@ -50,7 +50,7 @@ class UserManager {
   getUserByEmail = async (email) => {
     try {
       const user = await UserModel.findOne({ email });
-      return user.toObject();
+      return user;
     } catch (err) {
       throw Error(err.message);
     }
